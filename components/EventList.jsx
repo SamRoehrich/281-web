@@ -29,7 +29,7 @@ const EventList = ({ user }) => {
     );
   else {
     return (
-      <Container>
+      <Container height="100%">
         {error && "ERROR!"}
         {loading && "Loading..."}
         {data &&

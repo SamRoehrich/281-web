@@ -17,6 +17,13 @@ function reducer(state, action) {
             })
             if (event !== null) return { event } 
             else return { event:  {}}
+        case "refresh":
+            event = fetch("http://localhost:5000/event", {
+                method: "GET",
+                body: { eventId: state.event.eventId}
+            })
+            if (event !== null) return { event } 
+            else return { event:  {}}
         default:
             return state 
     }

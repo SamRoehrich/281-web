@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Text from "./Text"
 
 const StyledButton = styled.button({
   height: "150px",
@@ -7,15 +8,10 @@ const StyledButton = styled.button({
   backgroundColor: "blue",
 });
 
-const Text = styled.p({
-  fontSize: 20,
-  color: "white",
-});
-
-const Button = ({ text, onClick }) => {
+const Button = ({ text, fontSize, onClick }) => {
   return (
     <StyledButton onClick={onClick}>
-      <Text>{text}</Text>
+      <Text fontSize={fontSize}>{text}</Text>
     </StyledButton>
   );
 };

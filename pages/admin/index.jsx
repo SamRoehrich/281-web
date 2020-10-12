@@ -8,14 +8,13 @@ import { AdminState } from "../../components/admin/AdminState"
 const AdminHome = () => {
   return (
     <AdminState>
-      <Container row wide>
-        <Column >
-          <Text>Events</Text>
+      <Container row width="100">
+        <Column width="20">
           <EventList user="sam_roehrich@icloud.com" />
         </Column>
-        <Container>
+        <Column width="75">
           <AdminEventInfo />
-        </Container>
+        </Column>
       </Container>
     </AdminState>
   );
