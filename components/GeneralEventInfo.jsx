@@ -1,14 +1,16 @@
-const { default: Text } = require("./styled/Text")
-import Container from '../components/styled/Container'
+import { useAdminState } from "../components/admin/AdminState";
+
+import Text from "../components/styled/Text";
+import Container from "../components/styled/Container";
 
 const GeneralEventInfo = () => {
-    
-    return (
-        <Container height="8%" row spaceBetween center>
-            <Text>Event Name: </Text>
-            <Text>Event Location: </Text>
-            <Text>Event Date: </Text>
-        </Container>
-    )
-}
-export default GeneralEventInfo
+  const { state } = useAdminState();
+  return (
+    <Container height="8%" row spaceBetween center>
+      <Text>Event Name: {state.currentEvent.eventName}</Text>
+      <Text>Event Location: {state.currentEvent.eventLocation}</Text>
+      <Text>Event Date: {state.currentEvent.eventDate}</Text>
+    </Container>
+  );
+};
+export default GeneralEventInfo;

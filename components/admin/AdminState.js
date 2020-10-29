@@ -4,42 +4,54 @@ const AdminContext = createContext();
 
 const AdminStateProvider = AdminContext.Provider;
 
+const API_ROUTE = "http://localhost:5000/event/all";
+
 const initialState = {
-  event: {}
+  events: [],
+  currentEvent: {
+    eventID: "",
+    scorekeeperCode: "",
+    adminCode: "",
+    eventName: "",
+    eventDate: "",
+    eventLocation: "",
+  },
+  user: "sam_roehrich@icloud.com",
 };
 
-function reducer(state, action) {
-    switch(action.type) {
-        case "set-event":
-            let event = fetch("http://localhost:5000/event", {
-                method: "GET",
-                body: { eventId: action.payload}
-            })
-            if (event !== null) return { event } 
-            else return { event:  {}}
-        case "refresh":
-            event = fetch("http://localhost:5000/event", {
-                method: "GET",
-                body: { eventId: state.event.eventId}
-            })
-            if (event !== null) return { event } 
-            else return { event:  {}}
-        default:
-            return state 
-    }
+const loadEvents = async (user) => {
+  const response = await fetch(API_ROUTE, {
+    method: "POST",
+    body: { user },
+  });
+  const data = await response.json();
+  return data;
+};
+
+async function reducer(state, action) {
+  switch (action.type) {
+    case "load-all-events":
+      const events = await loadEvents(state.user);
+      console.log(events);
+      return { ...state, events: events };
+    case "set-current-event":
+      return { ...state, currentEvent: action.payload };
+    default:
+      return state;
+  }
 }
 
 function AdminState({ children }) {
-    const [state, dispatch] = useReducer(reducer, initialState)
-    const defaultValues = { state, dispatch}
-    return <AdminStateProvider value={defaultValues}>
-        {children}
-    </AdminStateProvider>
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const defaultValues = { state, dispatch };
+  return (
+    <AdminStateProvider value={defaultValues}>{children}</AdminStateProvider>
+  );
 }
 
 function useAdminState() {
-    const all = useContext(AdminContext)
-    return all
+  const all = useContext(AdminContext);
+  return all;
 }
 
-export { AdminState, AdminContext, useAdminState}
+export { AdminState, AdminContext, useAdminState };

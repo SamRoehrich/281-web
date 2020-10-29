@@ -9,12 +9,12 @@ const CreateEventForm = () => {
       rcName: "",
       rcEmail: "",
       numBoulders: 4,
-      scoreKeeperCode: "",
+      scorekeeperCode: "",
       adminCode: "",
     },
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-      fetch("http://localhost:5000/createEvent", {
+      fetch("http://localhost:5000/event/create", {
         method: "POST",
         body: JSON.stringify(values, null, 2),
         headers: {
@@ -76,13 +76,13 @@ const CreateEventForm = () => {
         onChange={formik.handleChange}
         value={formik.values.adminCode}
       />
-      <label htmlFor="scoreKeeperCode">Event Scorekeeper Passcode</label>
+      <label htmlFor="scorekeeperCode">Event Scorekeeper Passcode</label>
       <input
-        id="scoreKeeperCode"
-        name="scoreKeeperCode"
+        id="scorekeeperCode"
+        name="scorekeeperCode"
         type="text"
         onChange={formik.handleChange}
-        value={formik.values.scoreKeeperCode}
+        value={formik.values.scorekeeperCode}
       />
       <label htmlFor="numBoulders">Number of Boulders</label>
       <input

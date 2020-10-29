@@ -2,8 +2,7 @@ import AdminEventInfo from "../../components/admin/AdminEventInfo";
 import EventList from "../../components/EventList";
 import Column from "../../components/styled/Column";
 import Container from "../../components/styled/Container";
-import Text from "../../components/styled/Text";
-import { AdminState } from "../../components/admin/AdminState"
+import { AdminState } from "../../components/admin/AdminState";
 
 const AdminHome = () => {
   return (

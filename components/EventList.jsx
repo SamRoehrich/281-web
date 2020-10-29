@@ -1,28 +1,21 @@
-import useFetch from "use-http";
+import { useAdminState } from "../components/admin/AdminState";
 
 import Container from "../components/styled/Container";
 import ListItem from "../components/styled/ListItem";
 
 const EventList = ({ user }) => {
-  const { loading, error, data } = useFetch(
-    "http://localhost:5000/events",
-    {},
-    []
-  );
-
+  const { state } = useAdminState();
   if (user === "")
     return (
       <Container>
-        {error && "ERROR!"}
-        {loading && "Loading..."}
-        {data &&
-          data.map((event) => (
+        {state &&
+          state.events.map((event) => (
             <ListItem
               eventName={event.eventName}
               eventLocation={event.eventLocation}
               date={event.eventDate}
-              id={event.id}
-              key={event.id}
+              id={event.eventID}
+              key={event.eventID}
             />
           ))}
       </Container>
@@ -30,20 +23,16 @@ const EventList = ({ user }) => {
   else {
     return (
       <Container height="100%">
-        {error && "ERROR!"}
-        {loading && "Loading..."}
-        {data &&
-          data
-            .filter((event) => event.rcEmail === user)
-            .map((event) => (
-              <ListItem
-                eventName={event.eventName}
-                eventLocation={event.eventLocation}
-                date={event.eventDate}
-                id={event.id}
-                key={event.id}
-              />
-            ))}
+        {state !== null &&
+          state.events.map((event) => (
+            <ListItem
+              eventName={event.eventName}
+              eventLocation={event.eventLocation}
+              date={event.eventDate}
+              id={event.eventID}
+              key={event.eventID}
+            />
+          ))}
       </Container>
     );
   }
