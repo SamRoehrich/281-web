@@ -1,21 +1,18 @@
-import AdminEventInfo from "../../components/admin/AdminEventInfo";
-import EventList from "../../components/EventList";
-import Column from "../../components/styled/Column";
-import Container from "../../components/styled/Container";
-import { AdminState } from "../../components/admin/AdminState";
+import AdminDashBoard from "../../components/admin/AdminDashboard";
 
-const AdminHome = () => {
-  return (
-    <AdminState>
-      <Container row width="100">
-        <Column width="20">
-          <EventList user="sam_roehrich@icloud.com" />
-        </Column>
-        <Column width="75">
-          <AdminEventInfo />
-        </Column>
-      </Container>
-    </AdminState>
-  );
+const AdminHome = ({ events }) => {
+  return <AdminDashBoard events={events} />;
 };
 export default AdminHome;
+
+export async function getStaticProps() {
+  const data = await fetch("http://localhost:5000/event/all", {
+    method: "POST",
+  });
+  const events = await data.json();
+  return {
+    props: {
+      events,
+    },
+  };
+}

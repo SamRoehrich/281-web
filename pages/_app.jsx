@@ -1,4 +1,5 @@
 import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { AdminState } from "../components/admin/AdminState";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -16,11 +17,11 @@ const theme = {
 
 export default function App({ Component, pageProps }) {
   return (
-    <>
+    <AdminState>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
       </ThemeProvider>
-    </>
+    </AdminState>
   );
 }

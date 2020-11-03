@@ -19,21 +19,14 @@ const initialState = {
   user: "sam_roehrich@icloud.com",
 };
 
-const loadEvents = async (user) => {
-  const response = await fetch(API_ROUTE, {
-    method: "POST",
-    body: { user },
-  });
-  const data = await response.json();
-  return data;
-};
-
-async function reducer(state, action) {
+function reducer(state, action) {
   switch (action.type) {
     case "load-all-events":
-      const events = await loadEvents(state.user);
-      console.log(events);
-      return { ...state, events: events };
+      return {
+        ...state,
+        events: action.payload,
+        currentEvent: action.payload[0],
+      };
     case "set-current-event":
       return { ...state, currentEvent: action.payload };
     default:
