@@ -28,7 +28,10 @@ function reducer(state, action) {
         currentEvent: action.payload[0],
       };
     case "set-current-event":
-      return { ...state, currentEvent: action.payload };
+      let currentEvent = state.events.filter(
+        (event) => event.eventID === action.payload
+      );
+      return { ...state, currentEvent: currentEvent[0] };
     default:
       return state;
   }
