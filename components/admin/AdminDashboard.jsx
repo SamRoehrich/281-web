@@ -4,6 +4,7 @@ import EventList from "../../components/EventList";
 import Column from "../../components/styled/Column";
 import Container from "../../components/styled/Container";
 import { useEffect } from "react";
+import AthleteList from "../AthleteList";
 
 const AdminDashBoard = ({ events }) => {
   const { dispatch } = useAdminState();

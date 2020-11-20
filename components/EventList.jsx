@@ -6,7 +6,7 @@ import ListItem from "../components/styled/ListItem";
 const EventList = () => {
   const { state } = useAdminState();
   return (
-    <Container height="100%">
+    <Container height="100%" border>
       {state.events !== undefined &&
         state.events.map((event) => (
           <ListItem

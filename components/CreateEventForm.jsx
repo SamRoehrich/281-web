@@ -13,13 +13,14 @@ const CreateEventForm = () => {
       adminCode: "",
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
       fetch("http://localhost:5000/event/create", {
         method: "POST",
         body: JSON.stringify(values, null, 2),
         headers: {
           "Content-Type": "application/json",
         },
+      }).then(() => {
+        window.location = "http://localhost:3000/admin";
       });
     },
   });
@@ -51,14 +52,6 @@ const CreateEventForm = () => {
         type="date"
         onChange={formik.handleChange}
         value={formik.values.eventDate}
-      />{" "}
-      <label htmlFor="rcName">Regional Coordinator Name</label>
-      <input
-        id="rcName"
-        name="rcName"
-        type="text"
-        onChange={formik.handleChange}
-        value={formik.values.rcName}
       />{" "}
       <label htmlFor="rcEmail">Regional Coordinator email</label>
       <input

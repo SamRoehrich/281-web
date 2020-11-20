@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import Text from "./Text"
+import Text from "./Text";
 
 const StyledButton = styled.button({
   height: "150px",
   widht: "250px",
   borderRadius: "5px",
-  backgroundColor: "blue",
+  backgroundColor: "white",
 });
 
 const Button = ({ text, fontSize, onClick }) => {

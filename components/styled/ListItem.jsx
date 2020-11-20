@@ -6,11 +6,11 @@ const Item = styled.div({
   width: "100%",
   display: "flex",
   justifyContent: "space-evenly",
-  backgroundColor: "blue",
+  backgroundColor: "white",
 });
 
 const Text = styled.p({
-  color: "white",
+  color: "black",
   fontSize: 15,
 });
 

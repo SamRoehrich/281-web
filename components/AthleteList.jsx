@@ -1,21 +1,44 @@
-import { useFetch } from 'use-http'
+import { useState, useEffect } from "react";
+import { useAdminState } from "./admin/AdminState";
+import AthleteListItem from "./AthleteListItem";
 
-const AthleteList = ({ eventId }) => {
-    const {loading, error, data} = useFetch("http://localhost:5000/event", {
-        body: {
-            "eventId": eventId
-        } 
+import Container from "./styled/Container";
+import Text from "./styled/Text";
+
+const AthleteList = () => {
+  const [athletes, setAthletes] = useState([]);
+  const { state } = useAdminState();
+
+  useEffect(() => {
+    const data = {
+      eventID: state.currentEvent.eventID,
+    };
+    fetch("http://localhost:5000/event/athletes", {
+      body: JSON.stringify(data),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-    return (
-        <>
-        {loading && <p>Loading... </p>}
-        {error && <p>Error, reload page or contact admin</p>}
-        {data && 
-            <Container>
-
-            </Container>
-        }
-        </>
-    )
-}
-export default AthleteList
+      .then((res) => res.json())
+      .then((data) => setAthletes(data));
+  }, [state.currentEvent]);
+  return (
+    <>
+      {athletes !== [] && (
+        <Container>
+          <Container row spaceBetween margin>
+            <Text>First Name</Text>
+            <Text>Last Name</Text>
+            <Text>Age Catagory</Text>
+            <Text>Gender</Text>
+          </Container>
+          {athletes.map((athlete) => (
+            <AthleteListItem athlete={athlete} />
+          ))}
+        </Container>
+      )}
+    </>
+  );
+};
+export default AthleteList;

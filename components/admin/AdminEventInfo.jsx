@@ -11,9 +11,9 @@ const AdminEventInfo = () => {
   return (
     <>
       {state.currentEvent !== undefined && (
-        <Container width="75" height="75vh">
+        <Container width="75" height="75vh" border>
           <GeneralEventInfo />
-          <Container row width="75" spaceBetween>
+          <Container row width="75" spaceBetween border>
             <Column width="30">
               <Text>Event ID: {state.currentEvent.eventID}</Text>
               <Text>
@@ -26,7 +26,7 @@ const AdminEventInfo = () => {
               <Text>Add athlete</Text>
               <Text>Remove athlete</Text>
               <Text>Edit Score</Text>
-              <Text>Delete Evetn</Text>
+              <Text>Delete Event</Text>
             </Column>
             <Column width="30">
               <Text>Start Round</Text>
@@ -35,7 +35,9 @@ const AdminEventInfo = () => {
               <Text>Print Results</Text>
             </Column>
           </Container>
-          <AthleteList />
+          <Container>
+            <AthleteList />
+          </Container>
         </Container>
       )}
     </>
